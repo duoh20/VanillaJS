@@ -4,7 +4,22 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = "toDos";
 
-const toDos = []; //입력한 todo를 담을 배열을 생성
+let toDos = []; //입력한 todo를 담을 배열을 생성, const는 상수이므로 타입을 let으로 선언
+
+function deleteToDo(event) {
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    //console.log(event.target.parentNode);
+    //삭제할 요소 알아내기
+    //target으로 어떤 버튼이 클릭되었는지 타켓팅하여 parentNode를 사용해 버튼을 누르면 삭제해야할 상위 요소를 알아낸다.(여기서는 li）
+    const cleanToDos = toDos.filter(function(toDo){
+        return toDo.id !== parseInt(li.id);//li의 id가 Stting이기 떄문에 int로 파싱함
+    }); //filter는 array의 모든 아이템을 돌며 함수 실행하고, 조건이 true인 아이템만을 가지고 배열을 생성한다.
+    //여기서는 filter를 사용해 toDos 배열에 function(toDo)의 조건에 맞는 아이템들의 배열을 cleanTodos 변수에 받아주었음
+    toDos = cleanToDos; //cleanTodos에 담긴 filter한 배열을 toDos 배열로 옮김
+    saveToDos(); //필터된 배열을 로컬 스토리지에 업데이트
+}
 
 function saveToDos() { //로컬에 입력한 todo를 저장하는 함수
     localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
@@ -16,13 +31,14 @@ function paintToDo(text) { //제출된 자료를 리스트 형식으로 출력�
     const span = document.createElement("span");
     const newId = toDos.length + 1 //배열이 처음에는 비어있으므로 1을 더해줘야함
     delBtn.innerHTML  = "❌";
+    delBtn.addEventListener("click", deleteToDo);
     span.innerText = text;//submit 함수에서 가져온 텍스트 값을 span으로 감싼다
     li.appendChild(delBtn); //li안에 delBtn을 넣음
     li.appendChild(span); //li안에 span을 넣음
     li.id = newId; //todo 리스트를 생성하여 개별 목록에 아이디 부여
     toDoList.appendChild(li); //toDoList에 li를 넣음
     const toDoObj = {
-        text: text,
+        text:text,
         id:newId
     };
     toDos.push(toDoObj);//array에 toDoObj를 추가
