@@ -1,0 +1,27 @@
+body {
+background-color:#ecf0f1;
+}
+
+.btn {
+    cursor: potinter;
+}
+
+body {
+    color: #7f8c8d;
+}
+
+.clicked {
+    color: #7f8c8d;
+}
+
+.form,
+.greetings {
+    display: none;
+}
+
+.showing {
+    display: block;
+}
+
+
+

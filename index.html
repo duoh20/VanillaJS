@@ -2,10 +2,31 @@
 <html>
   <head>
     <title>something</title>
-    <link href="style.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="index.css"/>
   </head>
+
   <body>
-    <h1 id="title">This Works!</h1>
-    <script src="index.js" ></script>
+
+    <div class="js-clock">
+      <h1>00:00:00</h1>
+    </div>
+
+    <form class="js-form form">
+      <input type="text" placeholder="What's your name?" />
+    </form>
+    <h4 class="js-greeting greeting"></h4>
+    
+    <form class="js-toDoForm">
+      <input type="text" placeholder="Write a to do" />
+    </form>
+
+    <ul class="js-toDoList">
+    </ul>
+
+    <script src="clock.js"></script>
+    <script src="greeting.js"></script>
+    <script src="todo.js"></script>
   </body>
+
 </html>
